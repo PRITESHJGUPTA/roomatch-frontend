@@ -1,3 +1,5 @@
+// App.jsx (with gender and preference added to join form)
+
 import React, { useState } from 'react';
 import API from './api';
 import QuestionForm from './QuestionForm';
@@ -8,6 +10,8 @@ function App() {
   const [userId, setUserId] = useState('');
   const [joined, setJoined] = useState(false);
   const [roomSize, setRoomSize] = useState(2);
+  const [gender, setGender] = useState('');
+  const [lookingFor, setLookingFor] = useState('');
 
   const createRoom = async () => {
     if (roomSize % 2 !== 0) {
@@ -28,13 +32,17 @@ function App() {
   };
 
   const joinRoom = async () => {
-    if (!name || !roomCode) {
-      alert('Please enter both name and room code');
+    if (!name || !roomCode || !gender || !lookingFor) {
+      alert('Please fill out all fields');
       return;
     }
 
     try {
-      const res = await API.post(`/rooms/${roomCode}/join`, { name });
+      const res = await API.post(`/rooms/${roomCode}/join`, {
+        name,
+        gender,
+        lookingFor
+      });
       setUserId(res.data.userId);
       setJoined(true);
     } catch (err) {
@@ -87,6 +95,21 @@ function App() {
             value={roomCode}
             onChange={(e) => setRoomCode(e.target.value)}
           />
+
+          <select value={gender} onChange={(e) => setGender(e.target.value)}>
+            <option value="">Select your gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="non-binary">Non-binary</option>
+          </select>
+
+          <select value={lookingFor} onChange={(e) => setLookingFor(e.target.value)}>
+            <option value="">Looking for</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="any">Anyone</option>
+          </select>
+
           <button onClick={joinRoom}>Join Room</button>
         </div>
       </div>
