@@ -4,7 +4,7 @@ RoomMatch is a live, event-based dating & social matching platform that allows p
 
 ## 🔗 Live Demo
 
-🌐 Frontend: [roommatch-frontend.vercel.app](https://roommatch-frontend-u.vercel.app)  
+🌐 Frontend: [roommatch-frontend.vercel.app](https://roomatch-frontend-u.vercel.app/)  
 🚀 Backend: [roommatch-backend.onrender.com](https://roommatch-backend.onrender.com)
 
 ---
